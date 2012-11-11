@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tpl:template
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:tpl="urn:layr:template"
+		xmlns:ui="urn:dependencies:components"
+		src="theme/theme.xhtml" >
+
+	<tpl:define name="title" id="title" value="New Company" />
+
+	<tpl:define name="body" id="body">
+
+		<form action="company/save" method="POST" >
+			<fieldset>
+				<legend>Register your company</legend>
+				<input type="hidden" name="id" />
+	
+				<ui:FormItem label="Name:">
+					<input type="text" name="name" />
+				</ui:FormItem>
+	
+				<ui:FormItem label="Email of Manager:">
+					<input type="text" name="lastName" />
+				</ui:FormItem>
+		
+			</fieldset>				
+			<ui:IconPrimaryButton icon="ok" label="Save" />
+		</form>
+
+	</tpl:define>
+</tpl:template>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>supporter-core</artifactId>
+		<groupId>supporter.com</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>supporter-core-web</artifactId>
+	<packaging>war</packaging>
+
+	<name>supporter-core Web module</name>
+
+	<dependencies>
+
+		<!-- Dependency on the EJB module so we can use it's services if needed -->
+		<dependency>
+			<groupId>supporter.com</groupId>
+			<artifactId>supporter-core-ejb</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Import the JAX-RS API, we use provided scope as the API is included 
+			in JBoss AS 7 -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.ws.rs</groupId>
+			<artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Import the CDI API, we use provided scope as the API is included in 
+			JBoss AS 7 -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- layr dependencies -->
+		<dependency>
+			<groupId>layr</groupId>
+			<artifactId>layr-jee-natural-routing-plugin</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>layr</groupId>
+			<artifactId>layr-jee-business-routing-plugin</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<sourceDirectory>${project.basedir}/application</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/tests</testSourceDirectory>
+		<directory>${project.basedir}/output</directory>
+		<outputDirectory>${project.basedir}/output/classes</outputDirectory>
+		<testOutputDirectory>${project.basedir}/output/test-classes</testOutputDirectory>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/tests</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<warSourceDirectory>configurations</warSourceDirectory>
+					<webResources>
+						<resource>
+							<directory>application</directory>
+							<includes>
+								<include>**/*.*</include>
+							</includes>
+							<excludes>
+								<exclude>**/*.java</exclude>
+							</excludes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
